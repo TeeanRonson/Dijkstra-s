@@ -56,49 +56,36 @@ public class Dijkstra {
 			currNode = queue.removeMin();
 			this.known[currNode.getId()] = true;
 			Edge currEdge = adjacencyList[currNode.getId()];
-//			System.out.println("At nodeId: " + currNode.getId());
-			int currDist = currNode.getPriority(); // grab the distance from the table?? Instead
+			int currDist = currNode.getPriority();
 			while (currEdge != null) {
-//				System.out.println("Current edge: " + currEdge.getNeighbor() + " " + currEdge.getCost());
 				int neighbourId = currEdge.getNeighbor();
 
 				if(known[neighbourId] == true) {
 					currEdge = currEdge.getNext();
 				} else {
-					//Update distances table
 					int newDistance = currDist + currEdge.getCost();
 					if (newDistance < distances[neighbourId]) {
 						distances[currEdge.getNeighbor()] = newDistance;
-						//Update previous table
 						previous[neighbourId] = currNode.getId();
 					}
-					//Insert elements into the queue
 					queue.insert(neighbourId, currDist + currEdge.getCost());
-					//Update Edge
 					currEdge = currEdge.getNext();
 				}
 			}
 			System.out.println();
 		}
 
-		for (int i = 0; i < known.length; i++) {
-			System.out.print(i + " ");
-			System.out.print(known[i] + " ");
-		}
-		System.out.println();
-
-		for (int i = 0; i < distances.length; i++) {
-			System.out.print(distances[i] + " ");
-		}
-		System.out.println();
-
-		for (int i = 0; i < previous.length; i++) {
-			System.out.print(previous[i] + " ");
-		}
-		System.out.println();
-
 		return getShortestPath(origin, destination);
 	}
+
+	/**
+	 * Private helper method traverses the Dijkstra table to find
+	 * the shortest path from origin to destination by following
+	 * previous ids
+	 * @param origin
+	 * @param destination
+	 * @return
+	 */
 
 	private List<Integer> getShortestPath(CityNode origin, CityNode destination) {
 
@@ -110,27 +97,13 @@ public class Dijkstra {
 			destId = this.previous[destId];
 		}
 		shortestPath.add(0, graph.getId((origin)));
-//		while(destId != -1 && i < graph.numNodes()) {
-//			int prevId = this.previous[destId];
-//			System.out.println("Previous id: " + prevId);
-//			temp[i] = prevId;
-//			destId = this.previous[prevId];
-//			i++;
-////			System.out.println("This is negative one: " + destId);
-//		}
-//
-//		while (i-1 >= 0) {
-////			System.out.println("here: " + i);
-//			System.out.println("Path: " + temp[i-1]);
-//			result.add(temp[i-1]);
-//			i--;
-//		}
-
 
 		return shortestPath;
 	}
 
-
+	/**
+	 * Private method initialises the Dijkstra table
+	 */
     private void initializeTable() {
 
 		for (int i = 0; i < distances.length; i++) {
@@ -140,6 +113,13 @@ public class Dijkstra {
 		}
 	}
 
+	/**
+	 * Sets the Origin selected for the Dijkstra table
+	 * @param known
+	 * @param distances
+	 * @param previous
+	 * @param original
+	 */
     private void setOrigin(boolean[] known, int[] distances, int[] previous, int original) {
 
 		known[original] = true;

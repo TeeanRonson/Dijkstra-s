@@ -1,5 +1,5 @@
 /** A class that represents a node of the graph.
- *  Contains the name of the city and the location  (x, y coordinates) on the "map".
+
  *  Do not modify this class.
  */
 package graph;
@@ -15,7 +15,6 @@ public class CityNode  {
 	 * @param y
 	 */
 	public CityNode(String cityName, double x, double y) {
-		// Do not change this method
 		this.city = cityName;
 		int xint = (int) (507*x / 7.0);
 		int yint = (int) (289 - 289*y/4.0);
@@ -27,7 +26,7 @@ public class CityNode  {
 	 * @return Point that has x and y; location of the node on the image
 	 */
 	public Point getLocation() {
-		return location;
+		return this.location;
 	}
 
 	/**
@@ -35,6 +34,10 @@ public class CityNode  {
 	 * @return the name of the city
 	 */
 	public String getCity() {
-		return city;
+		return this.city;
+	}
+
+	public String toString() {
+		return "City: " + getCity() + ", Location: " + getLocation();
 	}
 }

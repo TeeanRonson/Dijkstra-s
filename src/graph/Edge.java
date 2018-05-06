@@ -5,10 +5,33 @@ package graph;
  *  "destination" vertex), the cost and the reference to the next Edge.
  */
 class Edge {
-    private int neighbor; // id of the neighbor ("destination" vertex of this edge)
-	private int cost; // cost of this edge
-	private Edge next; // reference to the next "edge" in the linked list
+    private int neighbor;
+    private int cost;
+	private Edge next;
 
-	// FILL IN CODE: constructor, getters, setters
+    public Edge(int name, int cost, Edge next) {
+        this.neighbor = name;
+        this.cost = cost;
+        this.next = next;
+
+    }
+
+
+    public int getNeighbor() {
+        return this.neighbor;
+    }
+
+    public int getCost() {
+        return this.cost;
+    }
+
+    public Edge getNext() {
+        return this.next;
+    }
+
+    public void setNext(Edge nextEdge) {
+        this.next = nextEdge;
+    }
+
 
  }
